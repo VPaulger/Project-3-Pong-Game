@@ -7,16 +7,16 @@
 	<body>
 		<div class="game-wrapper">
 			<h1>Pong</h1>
-		    <div id="game">
-			<!-- Rough-out your SVG mark-up here to start... -->
-			  <!-- <svg id="gameBoard" version="1.1" width="512" height="256">
-				<rect id="paddle1" x="0" y="100" width="8" height="56"/>
-				<circle cx="50%" cy="50%" r="8"/>
-				<line id="dividingLine" x1="256" y1="0" x2="256" y2="256" stroke="black" stroke-dasharray="4"/>
-				<rect id="paddle2" x="504" y="100" width="8" height="56"/>
-			  </svg>-->
-				</div>
-				<div id="scoreBoard"></div>
+		  <div id="game"></div>
+			<div id="scoreBoard"></div>
+			<div id="gameInstructions1">
+				<p>W : up, S : down</p>
+				<p>▲ : up, ▼: down</p>
+			</div>
+			<div id="gameInstructions2">
+				<p>Press Space To Pause</p>
+			</div>
+			<div id="pauseGame">Game Paused</div>
 		</div>
 		
 		<script type="text/javascript" src="./build/bundle.js"></script>

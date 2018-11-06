@@ -90,3 +90,22 @@ h1 {
   justify-content: space-around;
   margin-top: 1rem;
 }
+
+#gameInstructions1 {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+#gameInstructions2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+#pauseGame {
+  display: none;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 4rem;
+}

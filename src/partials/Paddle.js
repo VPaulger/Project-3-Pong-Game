@@ -1,8 +1,5 @@
-// import KEYS from '../settings.js'
-
 export default class Paddle {
-  constructor(board, width, height, isLeft, up, down) { //add y to paramater of constructor? up, down -- add to parameter?
-    // this.boardHeight = boardHeight;
+  constructor(board, width, height, isLeft, up, down) {
     this.width = width;
     this.height = height;
     this.isLeft = isLeft;
@@ -14,20 +11,16 @@ export default class Paddle {
     this.board = board;
     this.yPosition = board.height / 2 - height / 2;
     this.speed = 10;
-    // this.score = 0;
-    // this.yPosition = document.getElementById('gameBoard').clientHeight - this.height;
-    //this.keyCode = new KEYS;
+
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
-        case up: //keycode==38
+        case up:
           this.yPosition -= this.speed
           this.yPosition = Math.max(0, this.yPosition)
-          // console.log("up")
           break;
         case down:
           this.yPosition += this.speed
           this.yPosition = Math.min(board.height - this.height, this.yPosition)
-          // console.log("down")
           break;
       }
     });
@@ -39,6 +32,15 @@ export default class Paddle {
     let topY = this.yPosition;
     let bottomY = this.yPosition + this.height; //height of the paddle
     return [leftX, rightX, topY, bottomY];
+  }
+
+  reset(){
+    if(this.isLeft) {
+      this.xPosition = 0;
+    } else {
+      this.xPosition = 504;
+    }
+    this.yPosition = this.board.height / 2 - this.height / 2;
   }
   
   render(svg) {

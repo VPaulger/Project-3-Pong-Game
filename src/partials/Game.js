@@ -6,34 +6,31 @@ import {KEYS} from '../settings.js'
 
 export default class Game {
 
-  constructor(element, width, height, pause) {//maybe add settings to the parameter
-		this.element = document.getElementById(element); //document.getElementById('game')
+  constructor(element, width, height) {
+		this.element = document.getElementById(element);
 		this.width = width;
 		this.height = height;
 		this.board = new Board (width, height);
-	  this.ball = new Ball (8, 1, height, width);
-		this.leftPaddle = new Paddle (this.board, 8, 56, true, KEYS.w, KEYS.s); //up, down
-		this.rightPaddle = new Paddle (this.board, 8, 56, false, KEYS.up, KEYS.down); //, up, down,
+		this.leftPaddle = new Paddle (this.board, 8, 56, true, KEYS.w, KEYS.s);
+    this.rightPaddle = new Paddle (this.board, 8, 56, false, KEYS.up, KEYS.down);
+    this.ball = new Ball (8, 1, height, width, this.leftPaddle, this.rightPaddle);
     this.scoreboard = new Scoreboard (this.ball, 70, 140);
+    this.pauseGameText = document.getElementById('pauseGame');
 
 		//pause function
 		this.pause = false;
 		this.pause = document.addEventListener("keydown", event => {
-      switch (event.keyCode) {
-        case KEYS.spaceBar:
-					this.pause = !this.pause;
-					console.log("pause");
-          break;
-      }
+      if (event.key === " ") {
+        if (this.pause){
+          this.pause = !this.pause;
+          this.pauseGameText.style.display = "none";   
+        } else {
+          this.pause = true;
+          this.pauseGameText.style.display = "flex";   
+          } 
+        }
     });
 	}
-
-	//2 paddles -- draw in html need size, position, speed of movement(on axis) - translate on user input
-	//1 ball(have to determine size) - have to render the ball in html, 
-	//ball needs: wall colission method & paddle collison, goal collision/method
-	//player -- add these classes to the constructor of game
-	//board class -- have to draw in html 
-	//scoreboard class -- draw in html, has a score, need width height
 
 	render() {
 		if (this.pause){

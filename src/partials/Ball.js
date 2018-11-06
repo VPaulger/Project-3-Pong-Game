@@ -1,30 +1,27 @@
 export default class Ball {
-  constructor(radius, direction, boardHeight, boardWidth) {
+  constructor(radius, direction, boardHeight, boardWidth, leftPaddle, rightPaddle) {
     this.radius = radius;
     this.boardWidth = boardWidth;
     this.boardHeight = boardHeight;
     this.direction = 1;
     this.ping1 = new Audio("public/sounds/pong-01.wav");
     this.ping2 = new Audio("public/sounds/pong-02.wav");
+    this.ping3 = new Audio("public/sounds/pong-03.wav");
+    this.leftPaddle = leftPaddle;
+    this.rightPaddle = rightPaddle;
     this.reset();
   }
 
   wallCollision(){
     if (this.yPosition <= this.radius) {
       this.vy = -this.vy;
+      this.ping3.play();
     }
 
     if (this.yPosition + this.radius >= this.boardHeight) {
       this.vy = -this.vy;
+      this.ping3.play();
     }
-
-    // if (this.xPosition <= this.radius) {
-    //   this.vx = -this.vx;
-    // }
-
-    // if (this.xPosition + this.radius >= this.boardWidth) {
-    //   this.vx = -this.vx;
-    // }
   }
 
   paddleCollision(player1, player2) {
@@ -32,14 +29,12 @@ export default class Ball {
       let [leftX, rightX, topY, bottomY] = player1.coordinates(player1.xPosition, player1.yPosition, player1.width, player1.height);
       if (this.xPosition - this.radius <= rightX && this.yPosition >= topY && this.yPosition <= bottomY) {
           this.vx = -this.vx;
-          console.log('we are colliding!');
           this.ping2.play();
       }
     } else {
       let [leftX, rightX, topY, bottomY] = player2.coordinates(player2.xPosition, player2.yPosition, player2.width, player2.height);
       if (this.xPosition + this.radius >= leftX && this.yPosition >= topY && this.yPosition <= bottomY) {
           this.vx = -this.vx;
-          console.log('we are colliding!');
           this.ping1.play();
       }
     }

@@ -24,20 +24,26 @@ export default class Scoreboard {
     if (this.player1Score == 10) {
       alert('You WON!');
       this.pongWin.play();
+      this.gameReset();
     }
 
     if (this.player2Score == 10) {
       alert('You WON!');
       this.pongWin.play();
+      this.gameReset();
     }
   }
 
+  gameReset() {
+    this.ball.leftPaddle.reset();
+    this.ball.rightPaddle.reset();
+    this.player1Score = 0;
+    this.player2Score = 0;
+  }
 
   render(svg) {
     this.ballScoreCollision();
-    // document.getElementById('gameBoard').innerHTML += `<rect id="score" x="50%" y="0" width="${this.width}" height="${this.height}" style="fill:#AB7C94;"/>`;
+
     document.getElementById('scoreBoard').innerHTML += `<p>Player 1 Score: ${this.player1Score}</p><p>Player 2 Score: ${this.player2Score}</p>`;
-    // document.getElementById('scoreBoard').innerHTML += `<p>Player 2 Score: ${this.player2Score}</p>`;
-    //document.getElementById('score').innerHTML += `<text>${this.player2Score}</text>`;
   }
 }
