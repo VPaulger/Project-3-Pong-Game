@@ -2,8 +2,10 @@ export default class Paddle {
   constructor(board, width, height, isLeft, up, down) {
     this.width = width;
     this.height = height;
+    
+    //boolean to determine position of paddles
     this.isLeft = isLeft;
-    if(isLeft) {
+    if(isLeft) { 
       this.xPosition = 0;
     } else {
       this.xPosition = 504;
@@ -12,6 +14,7 @@ export default class Paddle {
     this.yPosition = board.height / 2 - height / 2;
     this.speed = 10;
 
+    //event listener for moving paddles up and down
     document.addEventListener("keydown", event => {
       switch (event.keyCode) {
         case up:
@@ -26,6 +29,7 @@ export default class Paddle {
     });
   }
 
+  //function to provide paddle coordinates to ball to interact with
   coordinates() {
     let leftX = this.xPosition;
     let rightX = this.xPosition + this.width; //width of the paddle
@@ -34,6 +38,7 @@ export default class Paddle {
     return [leftX, rightX, topY, bottomY];
   }
 
+  //reset paddle position
   reset(){
     if(this.isLeft) {
       this.xPosition = 0;
@@ -44,6 +49,7 @@ export default class Paddle {
   }
   
   render(svg) {
+    //render svg paddles via a rectangle
     document.getElementById('gameBoard').innerHTML += `<rect x="${this.xPosition}" y="${this.yPosition}" width="${this.width}" height="${this.height}"/>`;
   }
 }

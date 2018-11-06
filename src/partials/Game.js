@@ -1,3 +1,4 @@
+//import classes
 import Board from './Board.js'
 import Ball from './Ball.js'
 import Paddle from './Paddle.js'
@@ -5,7 +6,6 @@ import Scoreboard from './Scoreboard.js'
 import {KEYS} from '../settings.js'
 
 export default class Game {
-
   constructor(element, width, height) {
 		this.element = document.getElementById(element);
 		this.width = width;
@@ -37,9 +37,11 @@ export default class Game {
 			return;
 		}
 
+    //clear gameboard and scoreboard on render
 		document.getElementById('game').innerHTML = '';
 		document.getElementById('scoreBoard').innerHTML = '';
 
+    //render game objects
 		this.board.render();
 		this.ball.render(this.leftPaddle, this.rightPaddle);
 		this.leftPaddle.render();

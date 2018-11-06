@@ -12,6 +12,7 @@ export default class Ball {
     this.reset();
   }
 
+  //wall collision on top wall and bottom wall
   wallCollision(){
     if (this.yPosition <= this.radius) {
       this.vy = -this.vy;
@@ -24,6 +25,7 @@ export default class Ball {
     }
   }
 
+  //detect paddle collision with ball
   paddleCollision(player1, player2) {
     if (this.vx < 0) {
       let [leftX, rightX, topY, bottomY] = player1.coordinates(player1.xPosition, player1.yPosition, player1.width, player1.height);
@@ -40,6 +42,7 @@ export default class Ball {
     }
   }
 
+  //reset ball position
   reset() {
     this.xPosition = this.boardWidth / 2;
     this.yPosition = this.boardHeight / 2;
@@ -55,6 +58,8 @@ export default class Ball {
 
     this.wallCollision();
     this.paddleCollision(player1, player2);
+
+    //render ball
     document.getElementById('gameBoard').innerHTML += `<circle cx="${this.xPosition}" cy="${this.yPosition}" r="${this.radius}"/>`;
   }
 }
