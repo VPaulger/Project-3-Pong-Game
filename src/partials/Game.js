@@ -2,27 +2,30 @@ import Board from './Board.js'
 import Ball from './Ball.js'
 import Paddle from './Paddle.js'
 import Scoreboard from './Scoreboard.js'
-// import SVG_NS from '../settings.js'
+import {KEYS} from '../settings.js'
 
 export default class Game {
 
-	constructor(element, width, height) {//maybe add settings to the parameter
+  constructor(element, width, height, pause) {//maybe add settings to the parameter
 		this.element = document.getElementById(element); //document.getElementById('game')
 		this.width = width;
 		this.height = height;
 		this.board = new Board (width, height);
-	  this.ball = new Ball (8);
-		this.leftPaddle = new Paddle (8, 56, true); //up, down
-		this.rightPaddle = new Paddle (8, 56, false); //, up, down
-		this.scoreboard = new Scoreboard (70, 140, 0, 0);
-		//this.settings = new SVG_NS;
-		// this.pause = document.addEventListener("keydown", event => {
-    //   switch (event.key) {
-    //     case space:
-    //       console.log("space");
-    //       break;
-    //   }
-    // });
+	  this.ball = new Ball (8, 1, height, width);
+		this.leftPaddle = new Paddle (this.board, 8, 56, true, KEYS.w, KEYS.s); //up, down
+		this.rightPaddle = new Paddle (this.board, 8, 56, false, KEYS.up, KEYS.down); //, up, down,
+    this.scoreboard = new Scoreboard (this.ball, 70, 140);
+
+		//pause function
+		this.pause = false;
+		this.pause = document.addEventListener("keydown", event => {
+      switch (event.keyCode) {
+        case KEYS.spaceBar:
+					this.pause = !this.pause;
+					console.log("pause");
+          break;
+      }
+    });
 	}
 
 	//2 paddles -- draw in html need size, position, speed of movement(on axis) - translate on user input
@@ -33,15 +36,15 @@ export default class Game {
 	//scoreboard class -- draw in html, has a score, need width height
 
 	render() {
+		if (this.pause){
+			return;
+		}
+
 		document.getElementById('game').innerHTML = '';
-		// let svg = document.createElementNS(SVG_NS, 'svg');
-		// svg.setAttributeNS(null, 'width', this.width);
-		// svg.setAttributeNS(null, 'height', this.height);
-		// svg.setAttributeNS(null, 'viewBox', `0 0 ${this.width} ${this.height}`);
-		// this.element.appendChild(svg);
-		//document.getElementById('game').innerHTML = `<svg id="gameBoard" width="${this.width}" height="${this.height}"></svg>`;
+		document.getElementById('scoreBoard').innerHTML = '';
+
 		this.board.render();
-		this.ball.render();
+		this.ball.render(this.leftPaddle, this.rightPaddle);
 		this.leftPaddle.render();
 		this.rightPaddle.render();
 		this.scoreboard.render();

@@ -2,7 +2,7 @@
 
 export default class Board {
   constructor(width, height) {
-	  this.width = width;
+	this.width = width;
     this.height = height;
     // this.settings = new SVG_NS;
 	}
