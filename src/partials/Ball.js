@@ -60,6 +60,6 @@ export default class Ball {
     this.paddleCollision(player1, player2);
 
     //render ball
-    document.getElementById('gameBoard').innerHTML += `<circle cx="${this.xPosition}" cy="${this.yPosition}" r="${this.radius}"/>`;
+    document.getElementById('gameBoard').innerHTML += `<circle stroke="black" fill="orange" cx="${this.xPosition}" cy="${this.yPosition}" r="${this.radius}"/>`;
   }
 }
