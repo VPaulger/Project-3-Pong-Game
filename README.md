@@ -36,7 +36,7 @@ Project Outcome
 Troubleshooting & Difficulties
 - initial difficulty was understanding how to properly link classes from one js file to another. after learning all of the required paramaters and methods was able to link all classes to render game objects.
 - secondary difficulty was linking a const for user key input to the main js file. after research with little headway, needed to ask a peer and learned that importing a const require {} around the name of the class.
-- detecting paddle collision was quite difficult and had to carefully build functions taking into acount the board dimesions, the paddle dimensions and ball radius.
+- detecting paddle collision was quite difficult and had to carefully build functions taking into account the board dimesions, the paddle dimensions and ball radius.
 
 Project Conclusion
 - learned how to use ES.next; another very powerful tool used as a web dev.
